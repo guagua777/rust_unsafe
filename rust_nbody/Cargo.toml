@@ -1,0 +1,26 @@
+[package]
+name = "rust_nbody"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+
+
+[[bin]]
+name = "nbody-2"
+path = "src/bin/nbody-2.rs" 
+
+[[bin]]
+name = "nbody-1"
+path = "src/bin/nbody-1.rs" 
+
+
+[[bin]]
+name = "nbody-3"
+path = "src/bin/nbody-3.rs" 
+
+
+[[bin]]
+name = "nbody-4"
+path = "src/bin/nbody-4.rs" 
