@@ -4,6 +4,8 @@ use std::arch::x86_64::*;
 use std::f64::consts::PI;
 use std::mem;
 
+
+// 定义结构体
 // Note 1
 #[repr(C)]
 struct body {
@@ -12,6 +14,8 @@ struct body {
     mass: f64, // 质量，大量
 }
 
+
+// 定义一些常量 const
 // Note 1
 const SOLAR_MASS: f64 = 4. * PI * PI;
 const DAYS_PER_YEAR: f64 = 365.24;
@@ -94,6 +98,9 @@ static mut solar_Bodies: [body; BODIES_COUNT] = [
 
 
 
+// 定义unsafe函数，参数使用原始指针 *mut body
+// 采用两种原始指针类型中的一种，*mut T
+// 另一种为*const T
 
 // 不断的改变bodies[0]中velocity数组的值
 // static void offset_Momentum(body bodies[]){
@@ -175,6 +182,7 @@ unsafe fn output_Energy(bodies: *mut body){
         // Add the potential energy between this body and
         // every other body.
         for j in i+1..BODIES_COUNT {
+            // 使用未初始化变量
             // The standard library provides 
             // std::mem::MaybeUninit for expressing storage locations that might be uninitialized.
             let mut position_Delta =   // <----------- Note 1
@@ -186,6 +194,7 @@ unsafe fn output_Energy(bodies: *mut body){
                 );
             }
 
+            // 重新解释数据
             // // we're in C here
             // float x = something();
             // int y = *(int *) &x;
@@ -332,7 +341,7 @@ unsafe fn output_Energy(bodies: *mut body){
 
 
 
-
+// 使用unsafe标记函数
 unsafe fn advance(bodies: *mut body) {
 
     const INTERACTIONS_COUNT: usize =
@@ -341,6 +350,8 @@ unsafe fn advance(bodies: *mut body) {
         INTERACTIONS_COUNT + INTERACTIONS_COUNT % 2;
 
 
+    // 使用对齐   
+    // tuple struct, 内容为64位浮点数 数组 
     // I’ve written Align16 as a tuple struct with unnamed fields
     // Note 1
     #[repr(align(16))]
@@ -370,6 +381,7 @@ unsafe fn advance(bodies: *mut body) {
 
 
     for i in 0..ROUNDED_INTERACTIONS_COUNT/2 {
+        // 使用未初始化变量
         let mut position_Delta =
             [mem::MaybeUninit::<__m128d>::uninit(); 3];
         for m in 0..3 {
@@ -455,6 +467,7 @@ unsafe fn advance(bodies: *mut body) {
 }
 
 fn main() {
+    // 使用unsafe块
     unsafe {
         offset_Momentum(solar_Bodies.as_mut_ptr());  // Note 1
         output_Energy(solar_Bodies.as_mut_ptr());

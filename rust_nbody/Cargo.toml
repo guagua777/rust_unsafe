@@ -6,6 +6,15 @@ edition = "2024"
 [dependencies]
 
 
+[profile.release]
+opt-level = 3
+codegen-units = 1
+debug = 2
+
+[[bin]]
+name = "rust_nbody"
+path = "src/main.rs"
+
 
 [[bin]]
 name = "nbody-2"
@@ -24,3 +33,30 @@ path = "src/bin/nbody-3.rs"
 [[bin]]
 name = "nbody-4"
 path = "src/bin/nbody-4.rs" 
+
+[[bin]]
+name = "raw-pointer"
+path = "src/bin/raw-pointer/raw-pointer.rs" 
+
+[[bin]]
+name = "raw-pointer2"
+path = "src/bin/raw-pointer/raw-pointer2.rs" 
+
+
+[[bin]]
+name = "raw-pointer-arithmetic"
+path = "src/bin/raw-pointer/raw-pointer-arithmetic.rs" 
+
+[[bin]]
+name = "raw-pointrer-reinterpreter"
+path = "src/bin/raw-pointer/raw-pointrer-reinterpreter.rs" 
+
+
+[[bin]]
+name = "raw-pointer3"
+path = "src/bin/raw-pointer/raw-pointer3.rs" 
+
+
+[[bin]]
+name = "raw-pointer4"
+path = "src/bin/raw-pointer/raw-pointer4.rs" 
