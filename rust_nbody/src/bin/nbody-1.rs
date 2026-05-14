@@ -124,6 +124,7 @@ unsafe fn offset_Momentum(bodies: *mut body) {
         for m in 0..3 {
             // 改变velocity数组里面的值
             // 计算速度的改变量
+            // 指针运算
             (*bodies.add(0)).velocity[m] -=  // <- Note 4
                 (*bodies.add(i)).velocity[m] // <- Note 5
                 * (*bodies.add(i)).mass / SOLAR_MASS;
