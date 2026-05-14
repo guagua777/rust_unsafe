@@ -57,3 +57,12 @@ This is a tutorial on translating C language code using unsafe, gradually elimin
    5. The Rust source code is longer, mostly due to the need to call Intel SIMD intrinsics directly, while the C program relies on non-standard operator overloading.
    6. When both programs are statically linked4, the Rust binary is smaller — 40% the size of the GCC/Clang output.
    7. Compile times are roughly equivalent (GCC is slightly faster, Clang, slightly slower).
+
+
+## 第六部分：
+1. 使用struct
+2. 使用rust内置函数：bodies.split_first_mut()
+3. 使用for循环迭代
+4. for (i, body) in bodies.iter().enumerate()
+5. for (i, mag) in magnitudes.iter_mut().enumerate()
+6. for (m, pos) in body.position.iter_mut().enumerate()
